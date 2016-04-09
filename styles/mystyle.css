@@ -1,5 +1,11 @@
-body {
-  background-color: #ccffcc;
+.title{
+	margin-top: 80px;
+	font-family: 'Poiret One', cursive;
+	color: white;
+	font-weight: bold;
+}
+body{
+  background-color: #66ccff;
 }
 .patientform{
   width: 400px;
