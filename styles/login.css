@@ -1,0 +1,33 @@
+
+body{
+	background: #66ccff;
+}
+.title{
+	margin-top: 80px;
+	font-family: 'Poiret One', cursive;
+	color: white;
+	font-weight: bold;
+}
+.form_bg{
+	background-color: #ccffcc;
+	padding: 20px;
+	border-radius: 10px;
+	position: absolute;
+	border:1px solid #0099cc;
+	margin:auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 320px;
+	height: 280px;
+}
+.align-center{
+	text-align: center;
+}
+.marginp{
+	margin: 10px;
+}
+.smallfont{
+	font-size: 13px;	
+}
