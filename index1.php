@@ -28,7 +28,7 @@
 			session_start();
 			$_SESSION['email'] = $email;
 			$_SESSION['name'] = $patient;
-			echo "<script>window.open('patientwelcome.php','_self')</script>";
+			echo "<script>window.open('newapp.php','_self')</script>";
 		}
 		else{
 			include 'warning.php';

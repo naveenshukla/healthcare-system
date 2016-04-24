@@ -21,9 +21,47 @@
           <span class="glyphicon glyphicon-log-out"></span> Log out
         </a>
  </p>
- <p> Hi <strong style="color: blue"><?php echo $_SESSION['name'] ?></strong>
- <?php
- echo $_SESSION['email']
-?>
+ <p style="font-size: 20px;"> Hi <strong style="color: blue; font-size: 20px;"><?php echo $_SESSION['name']."!" ?></strong>
+<div class="container">
+  <h2>Your Appointments</h2>
+  <p><i style="color:grey"><?php echo $_SESSION['name']."! "?></i> Your appointments will appear here, click on the appointments for more details</p>            
+  <table class="table">
+  	<thead>
+      <tr>
+        <th>Appointment Id</th>
+        <th>Speciality</th>
+        <th>Problem</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <?php
+    $success = 'success';
+    $danger = 'danger';
+    $info = 'info';
+ 	for($i=0; $i <34; $i++) {  
+  		echo "<tbody>
+      <tr class='$success'>
+        <td>John</td>
+        <td>Doe</td>
+        <td>Something</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr class='$danger'>
+        <td>Mary</td>
+        <td>Something</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr class='$info'>
+        <td>July</td>
+        <td>Something</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>";
+  	}
+  	?>
+  </table>
+</div>
 </body>
 </html>
