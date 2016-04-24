@@ -20,16 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     die("connection failed : ".$conn->connect_error);
   }*/
   //echo "connected successfully";
+  
+  
   $result = mysql_select_db('online_health',$conn);
-  if($result === FALSE){
+ if($result === FALSE){
   //echo "no such db exists ";
   $sql = "CREATE DATABASE online_health";
   mysql_query("$sql");
   }
-  $result = mysql_select_db('online_health',$conn);
-  if($result === FALSE){
-  //echo "failed ";
-  } 
   else{
    //echo "passed ";
   }
