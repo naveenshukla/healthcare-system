@@ -4,13 +4,13 @@
   <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
   <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="./styles/patientwelcome.css">
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="./styles/newapp.css">
+  <link rel="stylesheet" type="text/css" href="./styles/patientwelcome.css">
 
 <!-- Latest compiled and minified CSS -->
 <title>New consultation</title>
@@ -52,7 +52,16 @@
 
  		<li>Choose a speciality</li>
  		 <form role="form">
-  <div class="form-group">
+     <select class="form-control" id="bGroup" style="width: 200px; height: 30px;"name="bGroup">
+            <option>Select Speciality</option>
+            <option>Cardiology</option>
+            <option>Dentistry</option>
+            <option>Neurology</option>
+            <option>Dermatology</option>
+            <option>Psychiatry</option>
+            <option>Gynaceology</option>
+            </select>
+  <!-- <div class="form-group">
      <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Speciality
   <span class="caret"></span></button>
@@ -61,7 +70,7 @@
     <li><a href="#">CSS</a></li>
     <li><a href="#">JavaScript</a></li>
   </ul>
-</div>
+</div> -->
   </div>
   <div class="form-group">
     <label for="pwd">Summary about the problem :</label>
@@ -81,30 +90,50 @@
       </tr>
     </thead>
     <?php
+    include 'dbconn.php';
+    $email = $_SESSION['email'];
+    $var = "select * from appointment where patientemail='$email'";
+    $result = mysql_query("$var");
+    $num = mysql_num_rows($result);
     $success = 'success';
     $danger = 'danger';
     $info = 'info';
-  for($i=0; $i <3; $i++) {  
+    $appid = array();
+    $speciality = array();
+    $problem=array();
+    $status=array();
+    if(mysql_num_rows($result)){
+      while($row=mysql_fetch_row($result)){
+        $appid[] = $row[0];
+        $speciality[] = $row[3];
+        $problem[]=$row[4];
+        $status[]=$row[5];
+      }
+    }
+    else{
+      echo "no appointments yet :-(";
+    }
+  for($i=0; $i <$num; $i++) {
+    if($i%2==0){  
       echo "<tbody>
-      <tr class='$success'>
-        <td>John</td>
-        <td>Doe</td>
-        <td>Something</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr class='$danger'>
-        <td>Mary</td>
-        <td>Something</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
       <tr class='$info'>
-        <td>July</td>
-        <td>Something</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
+        <td>$appid[$i]</td>
+        <td>$speciality[$i]</td>
+        <td>$problem[$i]</td>
+        <td>$status[$i]</td>
       </tr>
     </tbody>";
+  }
+  else{
+    echo "<tbody>
+      <tr class='$danger'>
+        <td>$appid[$i]</td>
+        <td>$speciality[$i]</td>
+        <td>$problem[$i]</td>
+        <td>$status[$i]</td>
+      </tr>
+    </tbody>";  
+  }
     }
     ?>
   </table>

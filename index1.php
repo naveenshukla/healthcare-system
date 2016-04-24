@@ -1,6 +1,6 @@
 <?php 
     session_start();
-	if(isset($_SESSION['value']) && !empty($_SESSION['value'])) {
+	 if(isset($_SESSION['value']) && !empty($_SESSION['value'])) {
     	session_unset();
     	session_destroy();
        include 'loggedout.php';
