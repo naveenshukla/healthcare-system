@@ -6,13 +6,13 @@ if(isset($_GET['a'])) {
  if($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'dbconn.php';
     $appid = $_SESSION['appid'];
-    $summary = $_POST['summary'];
-    $precautions  = $_POST['precautions'];
-    $medicines = $_POST['medicines'];
-    $tests = $_POST['tests'];
-    $comments = $_POST['comments'];
-    $sql_insert = "INSERT INTO medicalreport
-   VALUES ('$appid','$summary','$precautions','$medicines','$tests','$comments')";
+    $treatment = $_POST['treatment'];
+    $medicine  = $_POST['medicine'];
+    //$medicines = $_POST['test'];
+    $test = $_POST['test'];
+    $payment = $_POST['payment'];
+    $sql_insert = "INSERT INTO invoice
+   VALUES ('$appid','$treatment','$medicine','$test','$payment')";
    mysql_query("$sql_insert");
  }
 ?>
@@ -33,33 +33,38 @@ if(isset($_GET['a'])) {
   	<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
+  <p style="float: right; position: fixed;z-index: 100;top: 0;right: 0;">
+        <a href="logout.php" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+ </p>
   <div class="align-center" >
-    <h1 class="title">Patient's Medical Report</h1>
+    <h1 class="title">Invoice</h1>
   </div>
   <div class="patientform center">
   <form class="form" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" data-toggle="validator" onsubmit="return myFunction()">
     <div class="form" role="form">
       <div class="form-group">
-        <label for="text">Full summary of Problem</label>
-        <textarea type="text" class="mdl-textfield__input" id="fName" class="smargin" name="summary" required ></textarea>
+        <label for="text">Treatment Cost</label>
+        <input type="text" class="mdl-textfield__input" id="fName" class="smargin" name="treatment" required >
       </div>
     </div>
     <div class="form" role+"form">
     	<div class="form-group">
-    		<label for="email">Precautions</label>
-    		<textarea type="text" class="mdl-textfield__input" id="email" class="smargin" name="precautions" required></textarea>
+    		<label for="email">Medicine</label>
+    		<input type="text" class="mdl-textfield__input" id="email" class="smargin" name="medicine" required>
     	</div>
-    	<div class="form-group">
+<!--     	<div class="form-group">
     		<label for="text">Medicines</label>
-    		<textarea type="text" class="mdl-textfield__input" id="pwd" class="smargin" name="medicines" required></textarea>
-    	</div>
+    		<input type="text" class="mdl-textfield__input" id="pwd" class="smargin" name="medicines" required>
+    	</div> -->
     	<div class="form-group">
-    		<label for="email">Prescribed Tests</label>
-    		<textarea type="text" class="mdl-textfield__input" id="rpwd" class="smargin" name="tests" required></textarea>
+    		<label for="email">Test</label>
+    		<input type="text" class="mdl-textfield__input" id="rpwd" class="smargin" name="test" required>
     	</div>
       <div class="form-group">
-        <label for="email">Other Comments</label>
-        <textarea type="text" class="mdl-textfield__input" id="rpwd" class="smargin" name="comments" required></textarea>
+        <label for="email">Payment Method</label>
+        <input type="text" class="mdl-textfield__input" id="rpwd" class="smargin" name="payment" required>
       </div>
     </div>
       <div class="align-center form-group">

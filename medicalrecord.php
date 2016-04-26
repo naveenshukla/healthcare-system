@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>medical record </title>
+  <title>Medical Record </title>
 <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

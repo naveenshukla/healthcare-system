@@ -67,7 +67,7 @@
 		}
   for($i=0; $i <$num; $i++) {
   	$report = 'report.php'.'?'.'a='.$appid[$i];
-	$invoice = 'invoice.php';
+	$invoice = 'invoice.php'.'?'.'a='.$appid[$i];
   	if($i%2==0){  
       echo "<tbody>
       <tr class='$info'>

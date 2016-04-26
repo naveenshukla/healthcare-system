@@ -1,0 +1,29 @@
+font-family: 'Abel', sans-serif;
+body{
+	
+}
+.heading{
+	font-family: 'Abel', sans-serif;
+	font-size: 60px;
+	text-align: center;
+	padding-top: 20px;
+		
+}
+.subheading{
+	font-family: 'Abel', sans-serif;
+	font-size: 40px;
+	text-align: center;
+	/*padding-top: 20px;*/
+
+}
+strong{
+	font-size: 25px;
+	padding-top: 50px;
+}
+img{
+	width: 240px;
+	height: 60px;
+}
+.name{
+	font-size: 20px;
+}

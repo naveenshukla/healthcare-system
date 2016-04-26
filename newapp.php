@@ -1,3 +1,9 @@
+<?php
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    include 'dbconn.php';
+    include 'appoint.php';
+ }
+?>
 <html>
 <head>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -17,9 +23,11 @@
 </head>
 <body>
  <?php
- session_start();
- ?>
-<img src = "http://www.docmeet.in/images/banner-4.jpg" id="myimg">
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
 <p style="float: right; position: fixed;z-index: 100;top: 0;right: 0;">
         <a href="logout.php" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-log-out"></span> Log out
@@ -32,35 +40,73 @@
    <div class = "navbar-header" >
       
       <div = "footer">
-      <ul class = "menu">
-               <li class="c1"><a class="a1" href = "#">Home</a></li>
-               <li class="c1"><a class="a1" href = "#">About</a></li>
-               <li class="c1"><a class="a1" href = "#">Help</a></li>
- 	</ul>
  	</div>
    </div>
    </div>
    <div class="col-md-4">
    </div>
  </nav>
- <p style="font-size: 20px;"> Hi <strong style="color: blue; font-size: 20px;"><?php echo $_SESSION['name']."!" ?></strong>
+ <p style="font-size: 20px"> Hi <strong style=" font-size: 20px;"><?php echo $_SESSION['name']."!" ?></strong></p>
  <table>
- 	<h1>New consultation</h1>
- 	<p align="center">For details on posting new consultation requests for the first time and on how to enter problems, tips and guidelines, click<a href="#"> Help</a>.</p> 
  	<ol>
- 		<li><a class="tab1" href="medicalrecord.html">Update Medical Record</a>(Having an up-to-date health record will help in diagnosis.)</li>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+  <h1>New Appointment</h1>
+  <p align="center">For details on posting new consultation requests for the first time and on how to enter problems, tips and guidelines, click<a href="#"> Help</a>.</p> 
+  <ol>
+    <li style=""><a class="tab1" href="medicalrecord.php">Update Medical Record</a>(Having an up-to-date health record will help in diagnosis.)</li>
 
- 		<li>Choose a speciality</li>
- 		 <form role="form">
-     <select class="form-control" id="bGroup" style="width: 200px; height: 30px;"name="bGroup">
-            <option>Select Speciality</option>
-            <option>Cardiology</option>
-            <option>Dentistry</option>
-            <option>Neurology</option>
-            <option>Dermatology</option>
-            <option>Psychiatry</option>
-            <option>Gynaceology</option>
-            </select>
+    <li style="">Choose a speciality</li>
+    <!--  <form role="form">
+  <div class="form-group">
+     <div class="dropdow -->
+ <!--  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+  <span class="caret"></span></button> -->
+ <select class="spcl" name="spcl" id="spcl" style="width: 125px; padding: 5px">
+  <option  value="physician">physician</option>
+  <option value="orthopaedic">orthopaedic</option>
+  <option value="cardiology">cardiology</option>
+  <option value="gynaecology">gynaecology</option>
+  <option  value="dermatology">dermatology</option>
+  <option value="neurology">neurology</option>
+  <option value="psychiatry‎">psychiatry‎</option>
+</select>
+<div class="form-group" style="padding: -2px;"><br>
+    <label for="pwd">Summary about the problem :</label>
+    <textarea type="text" class="form-control" id="summ" name="details" required></textarea>
+  </div>
+  <div class="form-group" style="padding: -2px;"><br>
+    <label for="">Date of Appointment</label>
+    <input type="text" class="form-control" id="summ" name="date" style="width: 200px; height: 30px" required>
+  </div>  
+  <button id="demo-show-snackbar" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" onclick="appoint.php">Submit</button>
+<div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
+  <div class="mdl-snackbar__text"></div>
+  <button class="mdl-snackbar__action" type="button"></button>
+</div>
+<script>
+(function() {
+  'use strict';
+  var snackbarContainer = document.querySelector('#demo-snackbar-example');
+  var showSnackbarButton = document.querySelector('#demo-show-snackbar');
+  var handler = function(event) {
+    showSnackbarButton.style.backgroundColor = '';
+  };
+  showSnackbarButton.addEventListener('click', function() {
+     'use strict';
+     //showSnackbarButton.style.backgroundColor = '#0000ff'; 
+    var data = {
+      message: 'Your form has been submitted ',
+      timeout: 2000,
+      actionHandler: handler,
+      actionText: 'ok'
+    };
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+  });
+}());
+</script>
+<!-- </form> -->
+  </ol>
+ </form>
   <!-- <div class="form-group">
      <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Speciality
@@ -72,11 +118,6 @@
   </ul>
 </div> -->
   </div>
-  <div class="form-group">
-    <label for="pwd">Summary about the problem :</label>
-    <textarea type="text" class="form-control" id="summ"></textarea>
-  </div>  
-  <button id="demo-show-snackbar" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="button">Submit</button>
   <div class="container">
   <h2>Your Appointments</h2>
   <p><i style="color:grey"><?php echo $_SESSION['name']."! "?></i> Your appointments will appear here, click on the appointments for more details</p>            
@@ -87,6 +128,8 @@
         <th>Speciality</th>
         <th>Problem</th>
         <th>Status</th>
+        <th>Report</th>
+        <th>Invoice</th>
       </tr>
     </thead>
     <?php
@@ -114,6 +157,9 @@
       echo "no appointments yet :-(";
     }
   for($i=0; $i <$num; $i++) {
+    $report = 'medicalreport.php'.'?'.'a='.$appid[$i];
+    $target = '_blank';
+    $invoice = 'invoicepage.php'.'?'.'a='.$appid[$i];
     if($i%2==0){  
       echo "<tbody>
       <tr class='$info'>
@@ -121,6 +167,8 @@
         <td>$speciality[$i]</td>
         <td>$problem[$i]</td>
         <td>$status[$i]</td>
+         <td><a href='$report' target= '$target'>View Report</a></td>
+        <td><a href='$invoice' target= '$target'>View Invoice</a></td>
       </tr>
     </tbody>";
   }
@@ -131,6 +179,8 @@
         <td>$speciality[$i]</td>
         <td>$problem[$i]</td>
         <td>$status[$i]</td>
+         <td><a href='$report' target= '$target'>View Report</a></td>
+        <td><a href='$invoice' target= '$target'>View Invoice</a></td>
       </tr>
     </tbody>";  
   }

@@ -30,9 +30,6 @@
 			include 'warning.php';
 			include 'index.php';
 		}
-		//print(json_encode($json));
-		/*$var = $json[0][0];
-		echo "$var";*/
   	}
   	elseif($type=='admin'){
   		
