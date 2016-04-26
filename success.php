@@ -13,7 +13,7 @@
 </head>
 <body>
   <div class="alert alert-success">
-  <strong>Success!</strong>   You have been successfully registered!!! Please login
+  <strong>Success!</strong>   You have been successfully registered!!!  Please login...<?php echo "<script>setTimeout('window.open(\'index1.php\')', 2000)</script>" ?>
   </div>
 </body>
 </html>

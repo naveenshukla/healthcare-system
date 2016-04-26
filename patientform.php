@@ -11,18 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $area = $_POST['area'];
   $eMail = $_POST['eMail'];
   $pwd = $_POST['pwd'];
-  $servername = "localhost";  
-  $username = "root";
-  $password = "shukla123";
-  $conn = mysql_connect($servername,$username,$password);
-
- /* if($conn->connect_error){
-    die("connection failed : ".$conn->connect_error);
-  }*/
-  //echo "connected successfully";
-  
-  
-  $result = mysql_select_db('online_health',$conn);
+  include 'dbconn.php';
  if($result === FALSE){
   //echo "no such db exists ";
   $sql = "CREATE DATABASE online_health";
@@ -47,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     else{
       mysql_query($sql_insert,$conn);
       include 'success.php';
-      include 'index.php';
     }
     //echo "it exists!!!!";
     }

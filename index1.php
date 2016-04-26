@@ -9,12 +9,8 @@
   	$type = $_POST['optradio'];
   	$email =  $_POST['userid'];
   	$pwd = $_POST['password'];
-  	$servername = "localhost";  
-	$username = "root";
-  	$password = "shukla123";
-  	$conn = mysql_connect($servername,$username,$password);
-  	$result = mysql_select_db('online_health',$conn);
-  	if ($type == 'doctor') {
+  	include 'dbconn.php';
+    if ($type == 'doctor') {
   	}
   	elseif ($type=='patient') {
   		$var = "select * from patient where email='$email' and password='$pwd'";
@@ -38,8 +34,26 @@
 		/*$var = $json[0][0];
 		echo "$var";*/
   	}
-  	elseif($type=='admin')
-  		echo "admin is selected";
+  	elseif($type=='admin'){
+  		
+      $var = "select * from admin where email='$email' and password='$pwd'";
+      $json = array();
+      $result = mysql_query("$var");
+      if(mysql_num_rows($result)){
+        while($row=mysql_fetch_row($result)){
+          $json[]=$row;
+      }
+      $admin = $json[0][2];
+      session_start();
+      $_SESSION['email'] = $email;
+      $_SESSION['name'] = $admin;
+      echo "<script>window.open('admin.php','_self')</script>";
+      }
+      else{
+        include 'warning.php';
+        include 'index.php';
+      }
+    }
   }
   else
   include 'index.php';
