@@ -76,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   </div>
   <div class="form-group" style="padding: -2px;"><br>
     <label for="">Date of Appointment</label>
-    <input type="text" class="form-control" id="summ" name="date" style="width: 200px; height: 30px" required>
+    <input type="text" class="form-control" id="summ" name="date" value="yyyy-mm-dd" style="width: 200px; height: 30px" required>
   </div>  
   <button id="demo-show-snackbar" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" onclick="appoint.php">Submit</button>
 <div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">

@@ -11,6 +11,29 @@
   	$pwd = $_POST['password'];
   	include 'dbconn.php';
     if ($type == 'doctor') {
+        $var = "select * from doctor where email='$email' and password='$pwd'";
+      $json = array();
+      $result = mysql_query("$var");
+    if(mysql_num_rows($result)){
+      while($row=mysql_fetch_row($result)){
+        $json[]=$row;
+      }
+      $patient = $json[0][1];
+      $speciality = $json[0][3];
+     if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+      $_SESSION['email'] = $email;
+      $_SESSION['name'] = $patient;
+      $_SESSION['speciality'] = $speciality;
+
+      echo "<script>window.open('doctor_login.php','_self')</script>";
+    }
+    else{
+      include 'warning.php';
+      include 'index.php';
+    }
   	}
   	elseif ($type=='patient') {
   		$var = "select * from patient where email='$email' and password='$pwd'";
@@ -21,7 +44,10 @@
 				$json[]=$row;
 			}
 			$patient = $json[0][1];
-			session_start();
+			if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 			$_SESSION['email'] = $email;
 			$_SESSION['name'] = $patient;
 			echo "<script>window.open('newapp.php','_self')</script>";
@@ -41,7 +67,10 @@
           $json[]=$row;
       }
       $admin = $json[0][2];
-      session_start();
+      if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+      } 
       $_SESSION['email'] = $email;
       $_SESSION['name'] = $admin;
       echo "<script>window.open('admin.php','_self')</script>";
