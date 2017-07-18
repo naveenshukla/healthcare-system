@@ -1,3 +1,11 @@
+#contains pending and confirmed appointments with date
+#if this page is getting request through get request, then find the appid in get request and update appointment status to fixed
+#with doctor email and appid
+#while doctor logs in, the speaciality of doctor is saved in session variable. So the 
+#appointment table is checked for the particular speciality and which are not assigned any doctor, the come in pending appointments.
+#similarly the appointment table is checked for the current doctor's email, which are confirmed so they 
+#come in confirmed appointments
+
 <?php
     if(!isset($_SESSION)) 
     { 
