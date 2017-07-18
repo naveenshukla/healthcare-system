@@ -1,3 +1,8 @@
+#admin can handle data of patients : report and payment
+#if patient payment is completed admin generates invoice
+#admin can also update the report of the patient like update tests and update medical treatment
+#admin handles all apointments, and update the payment details
+
 <html>
 <head>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
