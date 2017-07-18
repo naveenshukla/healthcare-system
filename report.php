@@ -1,3 +1,7 @@
+#report contains the patients summary 
+#report table have : appid, summary , precautions , medicines, tests, comments
+#report.php gets the appid through get request, all other columns of the table are sent through post request
+
 <?php
 session_start();
 if(isset($_GET['a'])) {
