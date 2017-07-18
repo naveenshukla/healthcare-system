@@ -1,3 +1,7 @@
+#invoice is generated
+#details for invoice is added through post request
+#invoice table contains : appid, treatment, medicine, test, payment
+
 <?php
 session_start();
 if(isset($_GET['a'])) {
